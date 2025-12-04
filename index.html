@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felipe Alves - Dev Portfolio</title>
+
+    <link rel="stylesheet" href="src/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Trocar Tema">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="main-container">
+
+        <section class="top-section">
+
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <img src="src/img/unnamed (1).jpg" alt="Foto de Perfil">
+                </div>
+                <div>
+                    <h1>Felipe Alves</h1>
+                    <!--<span class="role">Developer</span>-->
+                    <a href="mailto:felipefernandorinke@gmail.com" class="email" target="_blank">
+                        <i class="far fa-envelope"></i> felipefernandorinke@gmail.com
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/FelipeRinke" class="btn btn-github" target="_blank"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/felipe-alves-919b06240/" class="btn btn-linkedin"
+                        target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://api.whatsapp.com/send?phone=+5511956067118&text=Olá Felipe!"
+                        class="btn btn-portfolio" target="_blank"><i class="fa-brands fa-whatsapp" target="_blank"></i>
+                        WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <h2>Sobre Mim</h2>
+                <p>
+                    Graduado em Análise e Desenvolvimento de Sistemas e apaixonado por resolver problemas através do
+                    código. Atualmente, busco minha primeira oportunidade profissional para aplicar minha base técnica e
+                    crescer junto com uma equipe de desenvolvimento.
+                </p>
+                <p>
+                    Durante minha formação, não fiquei apenas na teoria: desenvolvi projetos práticos utilizando Java,
+                    C# e PHP, além de criar aplicações móveis e desktop. Tenho
+                    facilidade com lógica de programação e desenvolvimento Web .
+                </p>
+                <p style="margin-bottom: 0;">
+                    Com conhecimentos em Engenharia de Software e Metodologias Ágeis, sou um profissional dedicado,
+                    curioso e pronto para transformar desafios em soluções de software.
+                </p>
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h3>Qualificações</h3>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="icon-box bg-purple"><i class="fas fa-code"></i></div>
+                    <h4>Frontend</h4>
+                    <span>HTML5, CSS3, JavaScript</span>
+                </div>
+
+                <div class="skill-card">
+                    <div class="icon-box bg-blue"><i class="fas fa-server"></i></div>
+                    <h4>Backend</h4>
+                    <span>Java, C# (.NET), PHP e C</span>
+                </div>
+
+                <div class="skill-card">
+                    <div class="icon-box bg-indigo"><i class="fas fa-database"></i></div>
+                    <h4>Database</h4>
+                    <span>SQL, Modelagem de Dados</span>
+                </div>
+
+                <div class="skill-card">
+                    <div class="icon-box bg-blue"><i class="fa-solid fa-desktop"></i></div>
+                    <h4>Desktop</h4>
+                    <span>Windows Forms, C#</span>
+                </div>
+
+                <div class="skill-card">
+                    <div class="icon-box bg-purple"><i class="fas fa-mobile-alt"></i></div>
+                    <h4>Mobile</h4>
+                    <span>Android Nativo, Xamarin</span>
+                </div>
+
+                <div class="skill-card">
+                    <div class="icon-box bg-indigo"><i class="fas fa-infinity"></i></div>
+                    <h4>Ferramentas & Ágil</h4>
+                    <span>Git, GitHub, Scrum, Engenharia de Software</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        © 2025 Felipe Alves - Desenvolvedor
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            // Seleciona o elemento <html>
+            const html = document.documentElement;
+            // Seleciona o ícone dentro do botão
+            const icon = document.querySelector('.theme-toggle i');
+            // Verifica qual tema está ativo agora
+            const currentTheme = html.getAttribute('data-theme');
+
+            // Se estiver Dark, muda para Light
+            if (currentTheme === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-moon'); // Tira lua
+                icon.classList.add('fa-sun');     // Põe sol
+            } else {
+                // Se estiver Light, muda para Dark
+                html.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-sun');  // Tira sol
+                icon.classList.add('fa-moon');    // Põe lua
+            }
+        }
+    </script>
+</body>
+
+</html>

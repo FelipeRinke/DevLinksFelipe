@@ -1,0 +1,443 @@
+/* =========================================
+   VARIÁVEIS DE CORES (O Cérebro do Tema)
+   ========================================= */
+:root {
+    /* --- MODO ESCURO (Padrão) --- */
+    /* Usamos variáveis (--nome) para poder trocar as cores facilmente depois */
+
+    /* Cor de fundo principal (quase preto) */
+    --bg-color: #0a0e17;
+
+    /* Gradiente de fundo (efeito de luz roxa no canto) */
+    --bg-gradient: radial-gradient(ellipse at 20% 20%, rgba(167, 23, 23, 0.4), transparent 50%);
+    /* Cores de texto */
+    --text-primary: #ffffff;
+    /* Branco para títulos */
+    --text-secondary: #a0aaec;
+    /* Azul acinzentado para textos menores */
+
+    /* Configuração dos Cartões (Glassmorphism / Efeito Vidro) */
+    --card-bg: rgba(255, 255, 255, 0.03);
+    /* Fundo quase transparente */
+    --card-border: rgba(255, 255, 255, 0.1);
+    /* Borda fina e sutil */
+    --card-hover: rgba(255, 255, 255, 0.08);
+    /* Cor ao passar o mouse */
+
+    /* Cores de destaque (Acentos) */
+    --accent-purple: #FFFF;
+    --accent-blue: rgba(167, 23, 23, 0.4);
+    --accent-pink: #020202;
+}
+
+a.email {
+    text-decoration: none;
+    /* Tira o sublinhado */
+    color: inherit;
+    /* Mantém a cor do texto original */
+    cursor: pointer;
+    /* Garante que o mouse vire "mãozinha" */
+}
+
+a.email:hover {
+    opacity: 0.8;
+    /* Um efeito suave quando passa o mouse */
+    text-decoration: none;
+    /* Opcional: sublinhar só quando passa o mouse */
+}
+
+/* --- MODO CLARO --- */
+/* Quando o HTML tiver o atributo data-theme="light", essas cores sobrescrevem as de cima */
+[data-theme="light"] {
+    --bg-color: #f0f2f5;
+    /* Fundo cinza bem claro */
+    --bg-gradient: radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.15), transparent 40%);
+    --text-primary: #1f2937;
+    /* Cinza escuro para leitura */
+    --text-secondary: #4b5563;
+
+    /* Cartões no modo claro (fundo branco sólido) */
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.05);
+    --card-hover: #f9fafb;
+
+    /* Ajuste de tons das cores de destaque para ficarem visíveis no branco */
+    --accent-purple: #6d28d9;
+    --accent-blue: #0284c7;
+
+    .about-card p {
+        color: rgba(0, 0, 0, 0.61);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    /* Cores Específicas */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        /* Borda mais redonda fica mais moderno com degradê */
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        border: none;
+        /* Remove bordas padrões */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        /* Sombra suave embaixo */
+    }
+
+    /* Efeito ao passar o mouse (Sobe e Brilha) */
+    .btn:hover {
+        transform: translateY(-3px);
+        filter: brightness(1.15);
+        /* Aumenta o brilho do degradê */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* --- Cores Específicas com Degradê --- */
+
+    /* GitHub: Degradê Cinza Escuro para Cinza Claro */
+    .btn-github {
+        background: linear-gradient(135deg, #24292e 0%, #4f5964 100%);
+    }
+
+    /* LinkedIn: Degradê Azul Marca para Azul Profundo */
+    .btn-linkedin {
+        background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
+    }
+
+    /* WhatsApp: Degradê Verde Claro para Verde Escuro */
+    .btn-portfolio {
+        background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    }
+}
+
+
+
+
+
+
+/* =========================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Garante que o tamanho inclua bordas */
+    font-family: 'Segoe UI', sans-serif;
+    /* Fonte padrão */
+    transition: background 0.3s, color 0.3s;
+    /* Animação suave na troca de tema */
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    /* O gradiente não rola com a página */
+    color: var(--text-primary);
+    min-height: 100vh;
+    /* Ocupa pelo menos 100% da altura da tela */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* =========================================
+   COMPONENTES
+   ========================================= */
+
+/* Botão de Trocar Tema (Lua/Sol) */
+.theme-toggle {
+    position: absolute;
+    /* Fica fixo no canto relativo à tela */
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    padding: 10px;
+    border-radius: 50%;
+    /* Faz ficar redondo */
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    /* Centraliza o ícone */
+    z-index: 10;
+    /* Garante que fique acima de tudo */
+}
+
+/* Container Principal (Limita a largura do site) */
+.main-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    /* Espaço entre o topo e as qualificações */
+}
+
+/* --- SEÇÃO SUPERIOR (Perfil e Sobre) --- */
+.top-section {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    /* Coluna da esquerda menor, direita maior */
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Estilo do Perfil (Lado Esquerdo) */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    /* Alinha textos à esquerda */
+}
+
+/* Círculo da Foto */
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 4px;
+    /* Espessura da borda colorida */
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+    /* Gradiente da borda */
+    margin-bottom: 1rem;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    /* Garante que a foto não estique */
+    border: 4px solid var(--bg-color);
+    /* Cria o "espaço" entre a foto e a borda colorida */
+}
+
+/* Tipografia do Perfil */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.role {
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.email {
+    color: rgba(255, 255, 255, 0.685);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Botões de Redes Sociais */
+.social-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    /* Aumenta 10% do tamanho original */
+    filter: brightness(1.2);
+    /* Deixa a cor um pouquinho mais brilhante */
+}
+
+/* Cores específicas de cada botão */
+
+.btn-github,
+.btn-linkedin,
+.btn-portfolio {
+    background: rgba(255, 255, 255, 0.05);
+    /* Fundo muito sutil */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Borda fina e elegante */
+    color: var(--text-primary);
+    /* Usa a cor do texto do tema */
+    backdrop-filter: blur(5px);
+    /* Desfoque do vidro */
+    transition: all 0.3s ease;
+    /* Animação suave */
+}
+
+/* Efeito Hover (ao passar o mouse) */
+.btn-github:hover,
+.btn-linkedin:hover,
+.btn-portfolio:hover {
+    background: #ffffff;
+    /* Fica branco sólido */
+    color: #0a0e17;
+    /* Texto vira preto para leitura perfeita */
+    border-color: #ffffff;
+
+    /* Pequeno brilho branco para destacar */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    /* Sobe um pouquinho */
+}
+
+/* --- CARD SOBRE MIM (Lado Direito) --- */
+.about-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 2.5rem;
+    border-radius: 20px;
+    /* O efeito "blur" que embaça o que está atrás */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.about-card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.about-card p {
+    color: rgba(255, 255, 255, 0.685);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* --- SEÇÃO DE QUALIFICAÇÕES --- */
+.skills-section h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+/* Grid Automático */
+.skills-grid {
+    display: grid;
+    /* Cria colunas automaticamente com tamanho mínimo de 300px */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.2s, background 0.2s;
+    /* Animação ao passar o mouse */
+    cursor: default;
+}
+
+/* Efeito Hover nos cards */
+.skill-card:hover {
+    transform: translateY(-5px);
+    /* Sobe um pouquinho */
+    background: var(--card-hover);
+    border-color: var(--accent-purple);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    margin: 0 auto 1rem auto;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+}
+
+/* Variações de cor para os ícones */
+.bg-purple {
+    background: rgba(167, 23, 23, 0.2);
+    color: rgb(167, 23, 23);
+}
+
+.bg-blue {
+    background: rgba(167, 23, 23, 0.2);
+    color: rgb(167, 23, 23)
+}
+
+.bg-indigo {
+    background: rgba(167, 23, 23, 0.2);
+    color: rgb(167, 23, 23);
+}
+
+.skill-card h4 {
+    margin-bottom: 0.5rem;
+}
+
+.skill-card span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Rodapé */
+footer {
+    margin-top: auto;
+    padding-top: 3rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Celular e Tablets)
+   ========================================= */
+@media (max-width: 768px) {
+    .top-section {
+        grid-template-columns: 1fr;
+        /* Transforma em uma única coluna */
+        text-align: center;
+    }
+
+    .profile-card {
+        align-items: center;
+        /* Centraliza o perfil no mobile */
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .avatar-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Foto menor no celular */
+    h1 {
+        font-size: 2rem;
+    }
+
+    .main-container {
+        gap: 2rem;
+    }
+}
